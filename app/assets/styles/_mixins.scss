@@ -1,0 +1,33 @@
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: 0px) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @media (min-width: 672px) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @media (min-width: 1056px) {
+      @content;
+    }
+  } @else if $breakpoint == xl {
+    @media (min-width: 1312px) {
+      @content;
+    }
+  } @else if $breakpoint == max {
+    @media (min-width: 1584px) {
+      @content;
+    }
+  }
+}
+
+@mixin adaptive-padding($top: 0, $right: 0, $bottom: 0, $left: 0) {
+  padding: $top $right $bottom $left;
+  @include respond-to(md) {
+    padding: $top * 1.2 $right * 1.2 $bottom * 1.2 $left * 1.2;
+  }
+  @include respond-to(lg) {
+    padding: $top * 1.5 $right * 1.5 $bottom * 1.5 $left * 1.5;
+  }
+}

@@ -1,0 +1,21 @@
+:root {
+  --breakpoint-sm: 0px;
+  --breakpoint-md: 672px;
+  --breakpoint-lg: 1056px;
+  --breakpoint-xl: 1312px;
+  --breakpoint-max: 1584px;
+
+  --container-padding: 16px;
+  --container-margin: 0 auto;
+}
+
+@media (min-width: 1056px) {
+  :root {
+    --container-margin: 16px auto;
+  }
+}
+@media (min-width: 1584px) {
+  :root {
+    --container-margin: 24px auto;
+  }
+}

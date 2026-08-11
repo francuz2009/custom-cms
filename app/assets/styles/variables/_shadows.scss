@@ -1,0 +1,13 @@
+:root {
+  --shadow-s: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-m: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-l: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.2);
+}
+
+.dark {
+  --shadow-s: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-m: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-l: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.7);
+}
