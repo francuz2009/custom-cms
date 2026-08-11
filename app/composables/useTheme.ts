@@ -3,7 +3,7 @@ export type Theme = 'light' | 'dark' | 'system'
 const THEME_KEY = 'app-theme'
 
 export const useTheme = () => {
-  const theme = ref<Theme>('system')
+  const theme = ref<Theme>('light')
   const isDark = ref(false)
 
   const applyTheme = (themeValue: Theme) => {

@@ -28,7 +28,7 @@ body {
   font-size: var(--text-body-1-size, 14px);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--color-base-background, #ffffff);
+  background: var(--color-bg-base, #ffffff);
   color: var(--color-text-primary, #000000);
 }
 
@@ -85,7 +85,7 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-base-border-active, #0077ff);
+  outline: 2px solid var(--color-border-focus, #0077ff);
   outline-offset: 2px;
 }
 

@@ -40,12 +40,10 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-base-background);
-  color: var(--color-text-primary);
 
   &__header {
-    background: var(--color-base-background-complementary);
-    border-bottom: 1px solid var(--color-base-border);
+    background: var(--color-bg-generic);
+    border-bottom: 1px solid var(--color-border-generic);
     box-shadow: var(--shadow-s);
     position: sticky;
     top: 0;
@@ -56,65 +54,65 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: var(--spacing-16);
+    min-height: var(--space-16);
   }
 
   &__main {
     flex: 1;
-    padding: var(--spacing-6) 0;
+    padding: var(--space-6) 0;
   }
 
   &__navigation {
     display: flex;
-    gap: var(--spacing-2);
+    gap: var(--space-2);
     align-items: center;
   }
 
   &__navigation-link {
     display: inline-flex;
     align-items: center;
-    padding: var(--spacing-1) var(--spacing-2);
-    border-radius: var(--border-radius-s);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-s);
     color: var(--color-text-complementary);
     text-decoration: none;
-    font-weight: var(--font-weight-medium, 500);
+    font-weight: var(--font-weight-medium);
     transition:
-      color var(--transition-duration-s, 0.15s),
-      background var(--transition-duration-s, 0.15s);
+      color var(--transition-duration-s),
+      background var(--transition-duration-s);
 
     &:hover {
       color: var(--color-text-primary);
-      background: var(--color-base-background-hover);
+      background: var(--color-bg-generic-hover);
     }
 
     &.router-link-active {
       color: var(--color-text-brand);
-      background: var(--color-base-info-light);
+      background: var(--color-bg-info-light);
     }
 
     @media (max-width: 480px) {
-      padding: var(--spacing-2) var(--spacing-4);
+      padding: var(--space-2) var(--space-4);
     }
   }
 
   &__footer {
-    background: var(--color-base-background-complementary);
-    border-top: 1px solid var(--color-base-border);
+    background: var(--color-bg-generic);
+    border-top: 1px solid var(--color-border-generic);
     text-align: center;
-    padding: var(--spacing-4) 0;
+    padding: var(--space-4) 0;
     color: var(--color-text-secondary);
-    font-size: var(--text-body-2-size, 13px);
+    font-size: var(--text-body-2-size);
   }
 }
 
 @media (max-width: 672px) {
   .main-layout {
     &__header-inner {
-      min-height: var(--spacing-14);
+      min-height: var(--space-14);
     }
 
     &__main {
-      padding: var(--spacing-4) 0;
+      padding: var(--space-4) 0;
     }
   }
 }
