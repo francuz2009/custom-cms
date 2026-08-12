@@ -1,22 +1,20 @@
 <template>
-  <Transition name="fade">
+  <Transition name="modal">
     <div v-if="isOpen" class="modal-overlay" @click.self="close">
-      <Transition name="slide">
-        <div class="modal" :style="{ maxWidth }">
-          <header class="modal-header">
-            <slot name="header">
-              <h2 v-if="title">{{ title }}</h2>
-            </slot>
-            <button class="modal-close" @click="close">×</button>
-          </header>
-          <div class="modal-body">
-            <slot />
-          </div>
-          <footer v-if="$slots.footer" class="modal-footer">
-            <slot name="footer" />
-          </footer>
+      <div class="modal" :style="{ maxWidth }">
+        <header class="modal-header">
+          <slot name="header">
+            <h2 v-if="title">{{ title }}</h2>
+          </slot>
+          <button class="modal-close" @click="close">×</button>
+        </header>
+        <div class="modal-body">
+          <slot />
         </div>
-      </Transition>
+        <footer v-if="$slots.footer" class="modal-footer">
+          <slot name="footer" />
+        </footer>
+      </div>
     </div>
   </Transition>
 </template>
@@ -59,6 +57,8 @@ const close = () => emit('close')
   width: 100%;
   pointer-events: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  transform-origin: center;
 }
 
 .modal-header {
@@ -85,29 +85,28 @@ const close = () => emit('close')
   margin-bottom: var(--space-md, 16px);
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
+.modal-footer {
+  margin-top: var(--space-md, 16px);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm, 8px);
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.modal-enter-active,
+.modal-leave-active {
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.modal-enter-from {
   opacity: 0;
+  transform: scale(0.95) translateY(30px);
 }
 
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.3s ease;
-}
-
-.slide-enter-from {
+.modal-leave-to {
   opacity: 0;
-  transform: translateY(30px) scale(0.95);
-}
-
-.slide-leave-to {
-  opacity: 0;
-  transform: translateY(30px) scale(0.95);
+  transform: scale(0.95) translateY(30px);
 }
 
 @media (max-width: 600px) {

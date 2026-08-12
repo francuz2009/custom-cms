@@ -11,7 +11,7 @@
       >
         <component
           :is="modal.component"
-          v-bind="modal.props"
+          v-bind="modal.props || {}"
           @close="closeModal(modal.id)"
         />
       </ModalWrapper>
@@ -20,26 +20,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, provide } from 'vue'
+import type { Component } from 'vue'
 
 interface ModalState {
   id: string
-  component: any
-  props?: Record<string, any>
+  component: Component
+  props?: Record<string, unknown>
   title?: string
   maxWidth?: string
   isOpen: boolean
 }
 
 const modals = ref<ModalState[]>([])
-
-// Глобальный идентификатор для модалок
 let modalIdCounter = 0
 
-// Функции для управления
 function openModal(
-  component: any,
-  props?: Record<string, any>,
+  component: Component,
+  props?: Record<string, unknown>,
   options?: { title?: string; maxWidth?: string }
 ): string {
   const id = `modal-${++modalIdCounter}`
@@ -54,36 +52,32 @@ function openModal(
   return id
 }
 
-function closeModal(id: string) {
+function closeModal(id: string): void {
   const index = modals.value.findIndex((m) => m.id === id)
-  if (index !== -1) {
-    modals.value[index].isOpen = false
-    setTimeout(() => {
-      modals.value.splice(index, 1)
-    }, 300) // подождать окончания анимации
-  }
+  if (index === -1) return
+
+  const modal = modals.value[index]
+  if (!modal) return
+
+  modal.isOpen = false
+  setTimeout(() => {
+    modals.value.splice(index, 1)
+  }, 300)
 }
 
-function closeAllModals() {
+function closeAllModals(): void {
   modals.value.forEach((m) => (m.isOpen = false))
   setTimeout(() => {
     modals.value = []
   }, 300)
 }
 
-// Предоставляем API глобально
 provide('modal', {
   open: openModal,
   close: closeModal,
   closeAll: closeAllModals,
 })
 
-// Для использования в компонентах через composable
-onMounted(() => {
-  // ничего не требуется
-})
-
-// Экспортируем для useModal
 defineExpose({
   open: openModal,
   close: closeModal,
