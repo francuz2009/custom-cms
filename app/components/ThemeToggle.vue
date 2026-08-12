@@ -1,27 +1,29 @@
 <template>
-  <button class="theme-toggle" :title="buttonTitle" @click="toggle">
-    <span class="icon">{{ buttonIcon }}</span>
-    <span v-if="showLabel" class="label">{{ buttonTitle }}</span>
-  </button>
+  <div class="theme-toggle">
+    <BaseToggle @change="toggleTheme" />
+
+    <transition name="icon-fade" mode="out-in">
+      <span
+        :key="buttonIcon"
+        class="theme-toggle__icon"
+        :class="{ 'theme-toggle__icon-active': isDarkTheme }"
+      >
+        {{ buttonIcon }}
+      </span>
+    </transition>
+  </div>
 </template>
 
 <script setup lang="ts">
+import BaseToggle from '@/components/base/BaseToggle.vue'
+
 const { theme, toggleTheme } = useTheme()
 
-const toggle = () => {
-  toggleTheme()
-}
-
-const buttonTitle = computed(() => {
-  if (theme.value === 'light') return 'Тёмная тема'
-  if (theme.value === 'dark') return 'Светлая тема'
-  return 'Системная тема'
-})
+const isDarkTheme = computed(() => theme.value === 'dark')
 
 const buttonIcon = computed(() => {
-  if (theme.value === 'light') return '🌙'
-  if (theme.value === 'dark') return '☀️'
-  return '💻'
+  if (isDarkTheme.value) return '☀️'
+  return '🌙'
 })
 
 defineProps<{
@@ -31,28 +33,62 @@ defineProps<{
 
 <style scoped lang="scss">
 .theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: var(--radius-sm, 4px);
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all 0.2s;
+  position: relative;
 
   &:hover {
     background: var(--bg-primary);
     border-color: var(--border-focus);
   }
 
-  .icon {
-    font-size: 1.2em;
+  :deep(.base-toggle__track) {
+    width: 52px;
+    height: 30px;
   }
 
-  .label {
-    font-size: 0.9em;
+  :deep(.base-toggle__input) {
+    &:checked + .base-toggle__track .base-toggle__thumb {
+      transform: translateX(24px);
+    }
   }
+
+  :deep(.base-toggle__thumb) {
+    width: 22px;
+    height: 22px;
+  }
+
+  &__icon {
+    position: absolute;
+    margin: auto 0;
+    right: 8px;
+    top: 0;
+    bottom: 0;
+    height: 28px;
+    width: 18px;
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: right var(--transition-duration-m) ease;
+
+    &-active {
+      right: 28px;
+    }
+  }
+}
+
+.icon-fade-enter-active,
+.icon-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.icon-fade-enter-from {
+  opacity: 0;
+  transform: scale(0.5) rotate(-30deg);
+}
+
+.icon-fade-leave-to {
+  opacity: 0;
+  transform: scale(0.5) rotate(30deg);
 }
 </style>

@@ -51,7 +51,7 @@ const close = () => emit('close')
 .modal {
   background: white;
   border-radius: var(--radius-lg, 8px);
-  padding: var(--space-md, 20px);
+  padding: var(--spacing-5, 20px);
   max-height: 90vh;
   overflow-y: auto;
   width: 100%;
@@ -65,7 +65,7 @@ const close = () => emit('close')
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-md, 16px);
+  margin-bottom: var(--spacing-5, 16px);
 }
 
 .modal-close {
@@ -82,14 +82,14 @@ const close = () => emit('close')
 }
 
 .modal-body {
-  margin-bottom: var(--space-md, 16px);
+  margin-bottom: var(--spacing-5, 16px);
 }
 
 .modal-footer {
-  margin-top: var(--space-md, 16px);
+  margin-top: var(--spacing-5, 16px);
   display: flex;
   justify-content: flex-end;
-  gap: var(--space-sm, 8px);
+  gap: var(--spacing-2, 8px);
 }
 
 .modal-enter-active,
@@ -114,7 +114,7 @@ const close = () => emit('close')
     padding: 10px;
   }
   .modal {
-    padding: var(--space-sm, 12px);
+    padding: var(--spacing-2, 12px);
     max-height: 95vh;
     border-radius: var(--radius-sm, 4px);
   }
