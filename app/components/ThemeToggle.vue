@@ -1,5 +1,5 @@
 <template>
-  <button class="theme-toggle" @click="toggle" :title="buttonTitle">
+  <button class="theme-toggle" :title="buttonTitle" @click="toggle">
     <span class="icon">{{ buttonIcon }}</span>
     <span v-if="showLabel" class="label">{{ buttonTitle }}</span>
   </button>

@@ -1,9 +1,8 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
+  srcDir: 'app/',
 
-  envDir: './config',
-
-  devtools: { enabled: process.env.NODE_ENV !== 'production' },
+  devtools: { enabled: true },
 
   runtimeConfig: {
     apiSecret: process.env.NUXT_API_SECRET,
@@ -15,4 +14,45 @@ export default defineNuxtConfig({
   },
 
   css: ['@/assets/styles/global.scss'],
+
+  app: {
+    head: {
+      htmlAttrs: { lang: 'ru' },
+      meta: [
+        { charset: 'utf-8' },
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1',
+        },
+        {
+          name: 'yandex-verification',
+          content: '',
+        },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        {
+          rel: 'preload',
+          as: 'font',
+          type: 'font/woff2',
+          href: '/fonts/Onest.woff2',
+          crossorigin: 'anonymous' as const,
+        },
+      ],
+    },
+    pageTransition: false,
+  },
+
+  modules: ['@nuxt/eslint'],
+
+  vite: {
+    server: {
+      fs: {
+        strict: false,
+      },
+    },
+    resolve: {
+      extensions: ['.ts', '.vue', '.mjs', '.js', '.jsx', '.tsx', '.json'],
+    },
+  },
 })

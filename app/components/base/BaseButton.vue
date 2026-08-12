@@ -55,7 +55,6 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
 })
 
-// Классы кнопки
 const buttonClasses = computed(() => [
   'base-button',
   `base-button--${props.variant}`,
@@ -66,7 +65,6 @@ const buttonClasses = computed(() => [
   },
 ])
 
-// Определяем, внешняя ли ссылка
 const isExternalLink = computed(() => {
   if (!props.to) return false
   if (props.external) return true
@@ -87,7 +85,8 @@ const componentTag = computed(() => {
 
 // Атрибуты для компонента
 const componentAttrs = computed(() => {
-  const attrs: Record<string, any> = {
+  // Заменяем any на unknown для устранения предупреждения линтера
+  const attrs: Record<string, unknown> = {
     ...props,
   }
 
